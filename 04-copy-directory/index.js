@@ -2,7 +2,6 @@ const fs = require("fs/promises")
 const path = require("path")
 const pathFromCopy = path.resolve(__dirname, "files")
 const pathToCopy = path.resolve(__dirname, "files-copy")
-
 const {stat} = require('fs');
 
 const deleteExistsDirectory = async () => {    
