@@ -2,11 +2,6 @@ const fs = require("fs/promises")
 const path = require("path")
 const pathFromCopy = path.resolve(__dirname, "files")
 const pathToCopy = path.resolve(__dirname, "files-copy")
-const {stat} = require('fs');
-
-const deleteExistsDirectory = async () => {    
-    await fs.rm(pathToCopy, { recursive: true, force: true })
-}
 
 const  copyDir = async (src, dest) => {
      
@@ -23,20 +18,9 @@ const  copyDir = async (src, dest) => {
 
 const deleteandCreateFolder = async () => {
 
-    stat(pathToCopy, async function(err) {
-        if (!err) {
-            console.log(`\nDirectory is already exists. Ok, then let's update the files and folders`);
-            await deleteExistsDirectory()
-            console.log('____________\n');
-            await copyDir(pathFromCopy, pathToCopy)
-           console.log('Files was succesfully updated\n');
-        }
-        else if (err.code === 'ENOENT') {
-            console.log('\nCreate a directory\n');
-           await copyDir(pathFromCopy, pathToCopy)
-           console.log('Directory was successfully created the files were successfully copied\n');
-        }
-    });
+    await fs.rm(pathToCopy, { recursive: true, force: true })
+
+    await copyDir(pathFromCopy, pathToCopy)          
 
 }
 
